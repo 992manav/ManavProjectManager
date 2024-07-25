@@ -1,0 +1,49 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+  <div class="row mt-3">
+    <div class="col-8 offset-2">
+      <h1>Edit Project</h1>
+      <form method="post" action="/dashboard/<%= project._id %>/edit?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+
+        <div>
+          <label for="projectname" class="form-label">Project Name</label>
+          <input name="projectname" value="<%= project.projectname %>" id="projectname" class="form-control" required>
+          <div class="valid-feedback">Looks good!</div>
+          <br>
+        </div>
+
+        <div>
+          <label for="github_link" class="form-label">GitHub Repository Link</label>
+          <input type="url" name="github_link" value="<%= project.github_link %>" id="github_link" class="form-control" required>
+          <div class="valid-feedback">Looks good!</div>
+          <br>
+        </div>
+
+        <div>
+          <img src="<%=project.thumbnail.url%>"  style="height: 25%; width: 30%;display: block;border: 2px solid black;" alt="Project Thumbnail Preview">
+          <label for="thumbnail" class="form-label">Thumbnail</label>
+          <input type="file" name="thumbnail" id="thumbnail" class="form-control" accept="image/*">
+          <div class="valid-feedback">Looks good!</div>
+          <br>
+        </div>
+
+        <div>
+          <label for="live_link" class="form-label">Live Hosted Link</label>
+          <input type="url" name="live_link" value="<%= project.live_link %>" id="live_link" class="form-control">
+          <div class="valid-feedback">Looks good!</div>
+          <br>
+        </div>
+
+        <div>
+          <label for="tech_stack" class="form-label">Tech Stack Used</label>
+          <input type="text" name="tech_stack" value="<%= project.tech_stack %>" id="tech_stack" class="form-control">
+          <div class="valid-feedback">Looks good!</div>
+          <br>
+        </div>
+
+        <button class="btn btn-dark add-btn mt-0.5" type="submit">Edit Project</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

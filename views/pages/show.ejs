@@ -1,0 +1,122 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 1rem;
+    }
+
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+        background-color: #fff;
+        margin-bottom: 1rem;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        padding: 1rem;
+        font-size: 1.5rem;
+        color: #007bff;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .card-body {
+        padding: 3rem;
+    }
+
+    .card-link {
+        display: block;
+        padding: 1rem;
+        color: #007bff;
+        text-decoration: none;
+        border-top: 1px solid #ddd;
+        background-color: #f8f9fa;
+    }
+
+    .card-link:hover {
+        background-color: #e2e6ea;
+    }
+
+    .card-text{
+        margin-left: 2%;
+        margin-top: 2%;
+    }
+    .btn {
+        border: none;
+        border-radius: 0.25rem;
+        padding: 0.5rem 1rem;
+        color: white;
+        background-color: #007bff;
+        cursor: pointer;
+        font-size: 1rem;
+        text-align: center;
+        text-decoration: none;
+        margin-right: 0.5rem;
+    }
+
+    .btn-dark {
+        background-color: #343a40;
+    }
+
+    .btn-dark:hover {
+        background-color: #23272b;
+    }
+
+    .btns {
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+        color: #343a40;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>Listing Detail:</h1>
+        <div class="card">
+            <h5 class="card-title"><b><%= project.projectname %></b></h5>
+            <img src="<%=project.thumbnail.url%>" class="card-img-top" alt="no-thumbnail">
+            <!-- <div class="card-img-overlay">
+                
+            </div> -->
+            <div class="card-body">
+                <% if (currUser.usertype === 'admin') { %>
+                    <p class="card-text"><b>Owner-Usertype: <i><%= project.owner.usertype %></i></b></p>
+                    <p class="card-text"><b>Owner-Name: <i><%= project.owner.name %></i></b></p>
+                    <p class="card-text"><b>Owner-Email: <i><%= project.owner.email %></i></b></p>
+                <% } %>
+                <% if (currUser.usertype === 'student') { %>
+                    <p class="card-text"><b><i>Owner-NAME: <%= project.owner.name %></i></b></p>
+                <% } %>
+                <p class="card-text"><b>TECH STACK USED:</b> <%= project.tech_stack %></p>
+                <a href="<%= project.github_link %>" class="card-link">Github Link</a>
+                <a href="<%= project.live_link %>" class="card-link">Live Hosted Link</a>
+            </div>
+        </div>
+
+        <% if (currUser && (currUser._id.equals(project.owner._id) || currUser.usertype === 'admin')) { %>
+            <div class="btns">
+                <form method="get" action="/dashboard/<%= project._id %>/edit">
+                    <button type="submit" class="btn btn-dark">Edit</button>
+                </form>
+                <form method="post" action="/dashboard/<%= project._id %>?_method=DELETE">
+                    <button type="submit" class="btn">DELETE</button>
+                </form>
+            </div>
+        <% } %>
+    </div>
+</body>

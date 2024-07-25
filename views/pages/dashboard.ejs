@@ -1,0 +1,172 @@
+<% layout("/layouts/boilerplate") %> 
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4; 
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar {
+        background-color: #007bff; 
+        padding: 1rem;
+        color: white;
+        justify-content: end;
+    }
+
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        margin: 0 0.5rem;
+        border-radius: 0.25rem;
+        
+    }
+
+    .navbar a:hover {
+        background-color: #0056b3; 
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 1rem;
+        
+    }
+
+    .listing-card {
+        border: 2px solid #007bff;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 3rem;
+       
+    }
+
+    .listing-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 8px rgb(0, 0, 0);
+    }
+
+    .card-img-top {
+        height: 18rem;
+        object-fit:cover;
+        
+        margin-bottom: 1rem;
+    }
+
+   
+
+    .card-title {
+        color: #343a40;
+        font-size: 1.25rem;
+      
+    }
+
+    .card-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .card {
+        border: 2px solid pink;
+    }
+    .btn {
+        border: none;
+        border-radius: 0.25rem;
+        padding: 0.5rem 1rem;
+        color: white;
+        background-color: #007bff;
+        cursor: pointer;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .btn-dark {
+        background-color: #343a40;
+        border: none;
+    }
+
+    .btn-dark:hover {
+        background-color: #23272b;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+        color: #343a40;
+    }
+
+    .add-btn {
+        display: block;
+        margin: 1rem auto;
+    }
+
+    
+</style>
+
+<body>
+    <div class="navbar">
+        <% if (!currUser) { %>
+            <a href="/signup">Signup</a>
+            <a href="/login">Login</a>
+        <% } %>
+       <% if (currUser) { %>
+        <a href="/logout">Logout</a>
+       <% } %>
+    </div>
+    <div class="container">
+        <h1>All PROJECTS</h1>
+        <form method="get" action="/dashboard/new">
+            <button class="btn btn-dark add-btn">Create New Project</button>
+        </form>
+      
+        <% let projectsByOwner = {}; %> 
+
+        <% projects.forEach(project => { %>
+            <% if (!projectsByOwner[project.owner]) { %>
+                <% projectsByOwner[project.owner] = []; %>
+            <% } %>
+            <% projectsByOwner[project.owner].push(project); %>
+        <% }); %>
+
+
+
+<% for (let owner in projectsByOwner) { %>
+    <div class="project-owner">
+        <% if (currUser.usertype==='admin') { %>
+            <h3><b>Owner:-</b></h3>
+            <i><h4>Email: <%= projectsByOwner[owner][0].owner.email %></h4> 
+            <h4>Name: <%= projectsByOwner[owner][0].owner.name %></h4>  
+            <h4>User-Type: <%= projectsByOwner[owner][0].owner.usertype %></h4>  </i>
+            <br>
+            <div>
+                <form method="post" action="/dashboard/admin/user/<%= projectsByOwner[owner][0].owner._id%>?_method=DELETE">
+                    <button type="submit" class="btn">DELETE This User</button>
+                </form>
+            </div>
+        <% } %>
+                
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+            <% for (let project of projectsByOwner[owner]) { %>
+                <a href="/dashboard/<%= project._id %>" class="card-link">
+                    <div class="card col listing-card">
+                        <h5 class="card-title"><b><%= project.projectname %></b></h5>
+                        <img src="<%= project.thumbnail.url %>" class="card-img-top" alt="Project Thumbnail">
+                        <div class="card-body">
+                            
+                        </div>
+                    </div>
+                </a>
+            <% } %>
+        </div>
+        <hr>
+    </div>
+<% } %>
+</div>
+</body>
+
+
+
+

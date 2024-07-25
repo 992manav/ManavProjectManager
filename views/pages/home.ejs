@@ -1,0 +1,66 @@
+<% layout("/layouts/boilerplate") %> 
+
+<style>
+    body {
+       
+        background-color: #f4f4f4; 
+        margin: 0;
+        padding: 0;
+        background-color: #f3dfac;
+    }
+
+    .navbar {
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: #fd4343; 
+        padding: 1rem;
+        color: white;
+    }
+
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        margin: 0 0.5rem;
+        border-radius: 0.25rem;
+       
+    }
+
+    .navbar a:hover {
+        background-color:rgb(0, 213, 255) ;
+        box-shadow: 0 5px 5px gray;
+    }
+    .container{
+    text-align: center;
+    margin-top: 14%;
+   background-color:#e76413;
+   border-radius: 10px;
+        width:fit-content;
+       padding: 2%;
+    }
+
+    a{
+        text-decoration: none;
+        color:white;
+    }
+    
+
+
+
+  
+</style>
+
+<body>
+    <div class="navbar">
+        <% if (!currUser) { %>
+            <a href="/signup">Signup</a>
+            <a href="/login">Login</a>
+        <% } %>
+       <% if (currUser) { %>
+        <a href="/logout">Logout</a>
+       <% } %>
+    </div>
+    <div class="container">
+        <h1>Welcome,To MANAV Project Manager</h1>
+        <h3>Please<a href="/signup">Signup</a>/<a href="/login">Login</a>to Start </h3>
+    </div>
+</body>

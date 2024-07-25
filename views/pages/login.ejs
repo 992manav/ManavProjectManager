@@ -1,0 +1,73 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .navbar {
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: #fd4343; 
+        padding: 1rem;
+        color: white;
+    }
+
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        margin: 0 0.5rem;
+        border-radius: 0.25rem;
+       
+    }
+
+    .navbar a:hover {
+        background-color:rgb(0, 213, 255) ;
+        box-shadow: 0 5px 5px gray;
+    }
+    .container{
+        border: 2px solid gray;
+        padding: 2.5rem;
+        border-radius: 10px;
+        background-color:bisque;
+    }
+   
+</style>
+<div class="navbar">
+    <% if (!currUser) { %>
+        <a href="/signup">Signup</a>
+        <a href="/login">Login</a>
+    <% } %>
+   <% if (currUser) { %>
+    <a href="/logout">Logout</a>
+   <% } %>
+</div>
+<body >
+    <h1 class="col-6 offset-3 mt-4  ">Log in for MANAV Project Management System </h1>
+    <div class="row mt-4">
+        <div class="col-6 offset-3  container">
+            <form action="/login" method="post"  novalidate class="needs-validation">
+
+                <div>
+                    <label for="email" class="form-label">Email</label>
+                    <input name="email" id="email" placeholder="Email" class="form-control" required>
+                    
+                    <div class="valid-feedback">Looks good!</div>
+                    <br>
+                </div>
+
+                <div>
+                    <label for="password" class="form-label">Password</label>
+                    <input name="password" id="password" placeholder="Password" class="form-control" required>
+                    
+                    <div class="valid-feedback">Looks good!</div>
+                    <br>
+                </div>
+
+                <button class="btn btn-dark add-btn">Log in</button>
+            
+
+            </form>
+        </div>
+    </div>
+        
+
+
+</body>
+</html>

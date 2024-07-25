@@ -1,0 +1,48 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <h1 class="col-6 offset-3 mt-4">MANAV Project Management System</h1>
+    <div class="row mt-4">
+        <div class="col-6 offset-3">
+            <form action="/dashboard/new" method="post"  novalidate class="needs-validation" enctype="multipart/form-data">
+                
+                <div>
+                    <label for="projectname" class="form-label">Project Name</label>
+                    <input name="projectname" id="projectname" placeholder="Project Name" class="form-control" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <br>
+                </div>
+
+                <div>
+                    <label for="github_link" class="form-label">GitHub Repository Link</label>
+                    <input type="url" name="github_link" id="github_link" placeholder="GitHub Repository Link" class="form-control" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <br>
+                </div>
+
+                <div>
+                    <label for="thumbnail" class="form-label">Thumbnail</label>
+                    <input type="file" name="thumbnail" id="thumbnail" class="form-control" accept="image/*" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <br>
+                </div>
+
+                <div>
+                    <label for="live_link" class="form-label">Live Hosted Link</label>
+                    <input type="url" name="live_link" id="live_link" placeholder="Live Hosted Link" class="form-control">
+                    <div class="valid-feedback">Looks good!</div>
+                    <br>
+                </div>
+
+                <div>
+                    <label for="tech_stack" class="form-label">Tech Stack Used</label>
+                    <input type="text" name="tech_stack" id="tech_stack" placeholder="Tech Stack Used" class="form-control">
+                    <div class="valid-feedback">Looks good!</div>
+                    <br>
+                </div>
+
+                <button class="btn btn-dark add-btn" type="submit">Add Project</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
