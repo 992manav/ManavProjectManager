@@ -100,7 +100,7 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new localStrategy({ usernameField: 'email' },USER.authenticate()));
+passport.use(new localStrategy({ usernameField: 'name' },USER.authenticate()));
 
 passport.serializeUser(USER.serializeUser());
 passport.deserializeUser(USER.deserializeUser());
@@ -263,15 +263,15 @@ app.get("/login",(req,res)=>{
 
 app.post("/login",saveRedirectUrl,passport.authenticate("local",{ failureRedirect:'/login',failureFlash:true}),(req,res)=>{
    try{
-    let { email,password}=req.body;
+    let { name ,password}=req.body;
     // console.log(req.body);
    
     // console.log(email);
     // console.log(password);
-    if(!isValidEmail(email))
-            {
-                throw new Error("Only institute emails ending with @lnmiit.ac.in are acceptable.");
-            }
+    // if(!isValidEmail(email))
+    //         {
+    //             throw new Error("Only institute emails ending with @lnmiit.ac.in are acceptable.");
+    //         }
     if (!isValidPassword(password)) {
         throw new Error("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
     }  

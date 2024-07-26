@@ -19,7 +19,7 @@ const userSchema= new mongoose.Schema({
    
 });
 
-userSchema.plugin(passportLocalMongoose,{ usernameField: 'email' });
+userSchema.plugin(passportLocalMongoose,{ usernameField: 'name' });
 
 userSchema.post("findOneAndDelete",async(user)=>{
     await PROJECT.deleteMany({ owner: user._id });
