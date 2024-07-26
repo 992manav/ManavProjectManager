@@ -14,14 +14,15 @@ const projectSchema = new Schema({
     thumbnail: { 
         url:String,
         filename:String,
+        required: false,
     },
     live_link: {
         type: String,
-        required: false,
+        required: true,
     },
     tech_stack: {
         type: String,
-        required: false,
+        required: true,
     },
     owner:{
         type:Schema.Types.ObjectId,
