@@ -18,11 +18,11 @@ const projectSchema = new Schema({
     },
     live_link: {
         type: String,
-        required: true,
+        required: false,
     },
     tech_stack: {
         type: String,
-        required: true,
+        required: false,
     },
     owner:{
         type:Schema.Types.ObjectId,
