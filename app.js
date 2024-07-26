@@ -299,14 +299,28 @@ app.get("/dashboard/new",isLoggedIn,(req,res)=>{
 
 
 app.post("/dashboard/new",upload.single('thumbnail'),(req,res)=>{
-    let url=req.file.path;
-    let filename=req.file.filename;
+  
+    // let url=req.file.path;
+    // let filename=req.file.filename;
     // console.log(url);
     // console.log(filename);
     let {projectname,github_link,live_link,tech_stack}=req.body;
 
     let newProject=new PROJECT({projectname,github_link,live_link,tech_stack,owner:req.user._id});
-    newProject.thumbnail={url,filename};
+    if(typeof req.file!=="undefined"){
+        let url=req.file.path;
+        let filename=req.file.filename;
+    
+        // console.log(url);
+        // console.log(filename);
+        newProject.thumbnail={url,filename};
+    }else{
+        let url="https://images.unsplash.com/photo-1610513320995-1ad4bbf25e55?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+        let filename="no image";
+        newProject.thumbnail={url,filename};
+    }
+
+    
             newProject.save();
            // res.send(newProject);
     res.redirect("/dashboard");
