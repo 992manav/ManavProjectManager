@@ -176,9 +176,9 @@ app.post("/signup", wrapAsync(async(req,res)=>{
         if (usertype === "admin" && !adminEmails.includes(email)) {
             throw new Error("You are not authorized to register as an admin.");
         }
-        if (usertype === "student" && adminEmails.includes(email)) {
-            throw new Error("Your Email has privilege to register as an admin Only , So Please select admin");
-        }
+        // if (usertype === "student" && adminEmails.includes(email)) {
+        //     throw new Error("Your Email has privilege to register as an admin Only , So Please select admin");
+        // }
 
         // console.log(usertype);
         // console.log(name);
