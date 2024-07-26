@@ -198,6 +198,13 @@ app.post("/signup", wrapAsync(async(req,res)=>{
                 throw new Error("Confirm password is not equal to password entered above");
             }
             
+            const existingUser = await USER.findOne({ email: email, usertype: usertype });
+
+                if (existingUser) {
+                    throw new Error("This Usertype and Email is already Registered ,Please Log in to continue");
+                }
+
+
             const newUser=new USER({
                 usertype:usertype,
                 name:name,
