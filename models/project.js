@@ -14,7 +14,6 @@ const projectSchema = new Schema({
     thumbnail: { 
         url:String,
         filename:String,
-        required: false,
     },
     live_link: {
         type: String,
